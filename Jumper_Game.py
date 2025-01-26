@@ -1,7 +1,6 @@
 """
 Platformer Game
 
-python -m arcade.examples.platform_tutorial.11_animate_character
 """
 import math
 import os
@@ -220,7 +219,7 @@ class MainMenu(arcade.View):
     def on_draw(self):
         """Draw the menu"""
         self.clear()
-        beginning = f"The Zombified Dr. Grimstone and his robot henchmen have stolen all the treasure!\n\nYou must defeat them and gather all the treasure to win!\n\nClick to start the game"
+        beginning = f"The Zombified Dr. Grimstone and his robot henchmen have stolen all the treasure!\n\nYou must defeat them and gather all the treasure and get to the flag to win!\n\nClick to start the game"
         arcade.draw_text(
             beginning,
             SCREEN_WIDTH / 2,
