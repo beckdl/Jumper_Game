@@ -649,7 +649,8 @@ class GameView(arcade.View):
                 else:
                     points = int(collision.properties["Points"])
                     if points == 999 and self.score != 335:
-                        arcade.draw_text(
+                        def on_draw(self):
+                            arcade.draw_text(
                             "You haven't collected all the treasure yet! Keep going!",
                             SCREEN_WIDTH / 2,
                             SCREEN_HEIGHT / 1.5,
@@ -664,7 +665,7 @@ class GameView(arcade.View):
                         return
                     elif points == 999 and self.score == 335:
                         print("You win!")
-                        game_over = GameOverView()
+                        game_over = WinView()
                         self.window.show_view(game_over)
                     elif points != 999:
                         self.score += points
@@ -675,6 +676,37 @@ class GameView(arcade.View):
 
         # Position the camera
         self.center_camera_to_player()
+
+        endscore = self.score - 999
+
+
+class WinView(arcade.View):
+    """Class to manage the game overview"""
+
+    def on_show_view(self):
+        """Called when switching to this view"""
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        """Draw the game overview"""
+        self.clear()
+        win = f"Congratulations! You have defeated Dr. Grimstone and his robot henchmen and collected all the treasure!\nYour score is 325\n\nClick to restart or close the window to exit."
+        arcade.draw_text(
+            win,
+            SCREEN_WIDTH / 2,
+            SCREEN_HEIGHT / 2,
+            arcade.color.WHITE,
+            30,
+            width=SCREEN_WIDTH,
+            align="center",
+            anchor_x="center",
+            multiline=True,
+        )
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        """Use a mouse press to advance to the 'game' view."""
+        game_view = GameView()
+        self.window.show_view(game_view)
 
 
 class GameOverView(arcade.View):
